@@ -1,59 +1,73 @@
-/**@type {SVGImage[]} */
 
-let linea_svg=[];
-
-/**@type {Font} */
-let font
- 
-/**@type {SVGImage[]} */
-let colore_svg=[];
-
-let angle = 0;
-let random_colore;
-let random_linea;
-
-let t = 0;
+let svgPaths = [];
+let parola = "EMOLAND";
+let myFont;
 
 function preload() {
-  linea_svg = [
-  loadSVG("./assets/grafici/1.svg"),
-  loadSVG("./assets/grafici/2.svg"),
-  loadSVG("./assets/grafici/3.svg"),
-  loadSVG("./assets/grafici/4.svg"),
-  loadSVG("./assets/grafici/5.svg"),
-  loadSVG("./assets/grafici/6.svg"),
-  loadSVG("./assets/grafici/7.svg"),
-  loadSVG("./assets/grafici/8.svg"),
-  ];
-
+ myFont = loadFont("./fonts/EMOLAND REGULAR(1).ttf");
 }
- 
+
 function setup() {
-  createCanvas(400, 400, SVG);
-  imageMode(CENTER)
-  frameRate(40);//控制帧率
-  random_linea=random(linea_svg)
+createCanvas(windowWidth,windowHeight,SVG);
+background("#F7EAE8"); 
+ textAlign(CENTER, CENTER);
+ textSize(70);
+ fill(0);
+ textFont(myFont);
 
+ svgPaths = [
+ "./assets/grafici/1.svg",
+ "./assets/grafici/2.svg",
+ "./assets/grafici/3.svg",
+ "./assets/grafici/4.svg",
+ "./assets/grafici/5.svg",
+ "./assets/grafici/6.svg",
+ "./assets/grafici/7.svg",
+ "./assets/grafici/8.svg",
+ ];
+
+ injectDropCSS();
+
+ // ✅ 每隔 0.5 秒生成一个图像
+ setInterval(() => {
+ let index = floor(random(svgPaths.length));
+ let x = random(50, windowWidth - 150);
+ addDroppingSVG(svgPaths[index], x);
+ }, 500);
+}
+function draw() {
+ background("#F7E4E7");
+ fill(0);
+ noStroke(); text(parola, width / 2, height - 40);
 }
 
-function draw() {
-  clear(); // Non cancellare!
+// ✅ 创建并播放掉落动画
+function addDroppingSVG(path, x) {
+ let img = createImg(path);
+ img.size(100, 100);
+ img.position(x, -120); // 从上方掉落
+ img.addClass("drop-anim");
 
-   // t 在 0 -> 1 -> 0 之间循环
-  let cycle = 120; 
-  t = (frameCount % cycle) / (cycle / 2);
-  if (t > 1) t = 2 - t;
+ // 动画结束后删除图像
+ setTimeout(() => {
+ img.remove();
+ }, 3000);
+}
 
-  let scaleFactor = t;
-  let alpha = t * 255;
+// ✅ 注入新的 explode-drop 动画样式
+function injectDropCSS() {
+ createElement("style", `
+ @keyframes explode-drop {
+ 0%  { transform: translateY(0) scale(1); opacity: 1; }
+ 80% { transform: translateY(480px) scale(1); opacity: 1; }
+ 100% { transform: translateY(560px) scale(2); opacity: 0; }
+ }
 
-  push()
-  translate(200,200);
-  rotate(radians(-angle));
-  scale(scaleFactor);
-  tint(255, alpha);
-  image(random_linea,0,0,300,300)
-  pop()
-
-  angle +=0.5;
-} 
+ .drop-anim {
+ animation: explode-drop 3s ease-in-out forwards;
+ transform-origin: center center;
+ position: absolute;
+ pointer-events: none;
+ }
+ `);
+}
