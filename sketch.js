@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
 createCanvas(windowWidth,windowHeight,SVG);
-background("#F7EAE8"); 
+background("#F4E6E6"); 
  textAlign(CENTER, CENTER);
  textSize(70);
  fill(0);
