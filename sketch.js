@@ -9,9 +9,9 @@ myFont = loadFont("./fonts/EMOLAND REGULAR(1).ttf");
 
 function setup() {
 createCanvas(windowWidth,windowHeight,SVG);
-background("#F7EAE8"); 
+background("white"); 
 textAlign(CENTER, CENTER);
-textSize(70);
+textSize(80);
 fill(0);
 textFont(myFont);
 
