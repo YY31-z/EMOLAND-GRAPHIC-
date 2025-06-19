@@ -1,5 +1,5 @@
 let parola = "EMOLAND";
-let max_shapes = 20;
+let max_shapes = 15;
 
 /** @type {Image[]} */
 let svg = [];
@@ -58,7 +58,7 @@ function setup() {
       forma: random(svg),
       x: random(0, width),
       dimensione: random(80, 200),
-      velocita: random(0.2, 3.5),
+      velocita: random(0.2, 4.5),
       y: 0,
       velocita_rotazione: random(-0.05, 0.05),
     };
