@@ -44,7 +44,7 @@ function preload() {
     loadImage("./assets/grafici/31.svg"),
     loadImage("./assets/grafici/32.svg"),
   ];
-  font = loadFont("./fonts/EMOLAND REGULAR(1).ttf");
+  font = loadFont("./fonts/emoland.ttf");
 }
 
 function setup() {
