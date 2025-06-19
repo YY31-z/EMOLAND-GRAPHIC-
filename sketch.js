@@ -57,7 +57,7 @@ function setup() {
     let elemento = {
       forma: random(svg),
       x: random(0, width),
-      dimensione: random(50, 200),
+      dimensione: random(80, 200),
       velocita: random(0.2, 3.5),
       y: 0,
       velocita_rotazione: random(-0.05, 0.05),
