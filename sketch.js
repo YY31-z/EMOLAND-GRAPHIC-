@@ -69,12 +69,11 @@ function setup() {
 }
 
 function draw() {
-  background("white");
+  background(255);
   fill(0);
   noStroke();
   textAlign(CENTER, CENTER);
   textSize(70);
-  fill(0);
   textFont(font);
   text(parola, width / 2, height / 2);
 
